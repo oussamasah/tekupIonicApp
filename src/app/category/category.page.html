@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Previous" icon="caret-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{cat}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+<ion-grid>
+<ion-row>
+<ion-col size="12" size-sm="6"  *ngFor="let item of listProducts">
+  <ion-card>
+  <ion-card-header>
+  
+    <div class="slide-item-published" [ngStyle]="{'background-image': 'url(assets/imgs/posts/'+item.imgs[0]+' )'}"    >
+
+
+      <div class="card-actions">
+        <ion-buttons slot="end">
+         <ion-button>
+           <ion-icon name="heart"></ion-icon>
+         </ion-button>
+         <ion-button>
+           <ion-icon name="eye"></ion-icon>
+         </ion-button>
+       </ion-buttons>
+     </div>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-card-title>{{item.title}}</ion-card-title>
+    <ion-card-subtitle>{{item.date}}</ion-card-subtitle>
+   <div class="price">{{ item.price}}</div>
+   <p class="desc">{{ item.description}}</p>
+  
+  </ion-card-content>
+
+</ion-card>
+</ion-col >
+
+
+  </ion-row>
+</ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons class="footer-actions">
+      <ion-button> <ion-icon name="home"></ion-icon> </ion-button>
+      <ion-button> <ion-icon name="add-circle-sharp"></ion-icon></ion-button>
+      <ion-button> <ion-icon name="notifications-sharp"></ion-icon></ion-button>
+      <ion-button> <ion-icon name="person-sharp"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

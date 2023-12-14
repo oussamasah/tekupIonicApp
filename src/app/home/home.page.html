@@ -1,20 +1,97 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-searchbar animated="true" placeholder="Animated"></ion-searchbar>
+    <ion-buttons slot="secondary">
+      <ion-button> <ion-icon name="heart"></ion-icon> </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+>
+<swiper-container  [loop]="true"
+[pagination]="true" [autoplay]="true">
+  <swiper-slide><div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide.jpg )'}"   alt="slide-1" ></div></swiper-slide>
+  <swiper-slide><div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide2.jpg )'}"   alt="slide-1" ></div></swiper-slide>
+  <swiper-slide><div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide3.jpg )'}"   alt="slide-1" ></div></swiper-slide>
+
+</swiper-container>
+
+<ion-label class="grouping">Browse</ion-label>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+        <ion-button [routerLink]="['/category']" [queryParams]="{cat: 'xxx'}">
+          <ion-icon name="car-sport-sharp"></ion-icon>
+        </ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button>
+          <ion-icon name="bicycle-sharp"></ion-icon>
+        </ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button>
+          <ion-icon name="boat-sharp"></ion-icon>
+        </ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button>
+          <ion-icon name="construct-sharp"></ion-icon>
+        </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-label class="grouping">Last published</ion-label>
+
+<swiper-container  [loop]="true"
+[pagination]="true" [autoplay]="true">
+
+
+  <swiper-slide *ngFor="let item of lastPublished">
+    <ion-card>
+    <ion-card-header>
+    
+      <div class="slide-item-published" [ngStyle]="{'background-image': 'url(assets/imgs/posts/'+item.imgs[0]+' )'}"    >
+
+ 
+        <div class="card-actions">
+          <ion-buttons slot="end">
+           <ion-button>
+             <ion-icon name="heart"></ion-icon>
+           </ion-button>
+           <ion-button>
+             <ion-icon name="eye"></ion-icon>
+           </ion-button>
+         </ion-buttons>
+       </div>
+      </div>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-card-title>{{item.title}}</ion-card-title>
+      <ion-card-subtitle>{{item.date}}</ion-card-subtitle>
+     <div class="price">{{ item.price}}</div>
+     <p class="desc">{{ item.description}}</p>
+    
+    </ion-card-content>
+
+  </ion-card>
+</swiper-slide>
+</swiper-container>
+
+
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons class="footer-actions">
+      <ion-button> <ion-icon name="home"></ion-icon> </ion-button>
+      <ion-button> <ion-icon name="add-circle-sharp"></ion-icon></ion-button>
+      <ion-button> <ion-icon name="notifications-sharp"></ion-icon></ion-button>
+      <ion-button> <ion-icon name="person-sharp"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
