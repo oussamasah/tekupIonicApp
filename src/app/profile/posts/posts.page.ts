@@ -3,6 +3,7 @@ import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { AlertController, NavController } from '@ionic/angular';
 import {
   AngularFireStorage,
   AngularFireUploadTask,
@@ -12,6 +13,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { imgFile } from 'src/app/interfaces/PostInterface';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-posts',
@@ -21,22 +23,180 @@ import { imgFile } from 'src/app/interfaces/PostInterface';
 export class PostsPage implements OnInit {
   @ViewChild(IonModal)
   modal!: IonModal;
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alerte annulée');
+      },
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        console.log('Alerte confirmée');
+      },
+    },
+  ];
+
+  message = 'Cet exemple de modal utilise des déclencheurs pour ouvrir automatiquement une modal lorsque le bouton est cliqué.';
   name="";
-  
-  constructor( ) { 
-   
-  }
+  postedit = {
+    uid:"",
+    category:"",
+    title: '',
+    description: '',
+    price: '',
+    gallery: [] as string[],
+  };
+  post = {
+    userId: JSON.parse(localStorage.getItem('user')!).uid,
+    category:"",
+    title: '',
+    description: '',
+    price: '',
+    gallery: [] as string[],
+  };
+  posts: any[] = [];
+  isModalOpen: boolean = false;
+
+  constructor(
+    private afs: AngularFirestore,
+    private storage: AngularFireStorage,
+    private postService: PostsService,
+    private alertController: AlertController,
+    private navCtrl: NavController,
+  ) {}
 
   ngOnInit() {
-    null
+    this.loadPosts();
   }
-  cancel() {
+
+  // Chargement des publications
+  loadPosts() {
+    this.postService.getPosts().subscribe(posts => {
+      this.posts = posts;
+    });
+  }
+
+  // Suppression d'une publication
+  async deletePost(postId: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmer la suppression',
+      message: 'Êtes-vous sûr de vouloir supprimer cette publication?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Supprimer',
+          handler: () => {
+            // Appeler la méthode deletePost dans le service PostService
+            this.postService.deletePost(postId).then(() => {
+              // Recharger les publications après la suppression
+              this.loadPosts();
+            });
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  // Chargement des détails d'une publication pour édition
+  loadPostDetails(postId: any) {
+    this.postService.getPostById(postId).subscribe(post => {
+      this.postedit = post;
+      this.isModalOpen = true;
+    });
+  }
+
+  // Enregistrement des modifications apportées à une publication
+  saveChanges() {
+    // Mettre à jour les détails de la publication en utilisant le service PostService
+    this.postService.updatePost(this.postedit).then(() => {
+      // Naviguer de nouveau vers la liste des publications après l'édition
+      this.cancelEdit();
+    });
+  }
+
+  // Ajout d'une nouvelle publication
+  addPost() {
+    // Télécharger les images sur le stockage Cloud et obtenir les URL de téléchargement
+    const uploadTasks = this.post.gallery.map(file => this.uploadImage(file));
+
+    // Attendre la fin de toutes les téléchargements
+    Promise.all(uploadTasks).then(downloadUrls => {
+      // Ajouter la publication à Firestore avec les URL de téléchargement
+      this.post.gallery = downloadUrls;
+      this.postService.addPost(this.post).then(() => {
+        console.log('Publication ajoutée avec succès !');
+        // Réinitialiser le formulaire ou effectuer des actions supplémentaires
+        this.post = {
+          userId: JSON.parse(localStorage.getItem('user')!).uid,
+          category: "",
+          title: '',
+          description: '',
+          price: '',
+          gallery: [],
+        };
+        this.loadPosts();
+        this.cancel();
+      }).catch(error => {
+        console.error('Erreur lors de l\'ajout de la publication :', error);
+      });
+    });
+  }
+
+  // Téléchargement d'une image sur le stockage Cloud
+  uploadImage(file: any): Promise<string> {
+    const filePath = `gallery/${new Date().getTime()}_${file.name}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = storageRef.put(file);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.snapshotChanges().pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe(downloadURL => {
+            resolve(downloadURL);
+          }, reject);
+        })
+      ).subscribe();
+    });
+  }
+
+  // Gestion de la sélection d'un fichier
+  handleFileInput(event: any) {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      this.post.gallery = Array.from(files);
+    }
+  }
+
+  // Annulation de l'édition d'une publication
+  cancelEdit() {
+    this.isModalOpen = false;
     this.modal.dismiss(null, 'cancel');
   }
 
+  // Annulation de l'ajout d'une nouvelle publication
+  cancel() {
+    this.isModalOpen = false;
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  // Confirmation de l'édition d'une publication
+  confirmEdit() {
+    this.saveChanges();
+  }
+
+  // Confirmation de l'ajout d
   confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+    this.addPost()
   }
 
   onWillDismiss(event: Event) {
@@ -48,88 +208,5 @@ export class PostsPage implements OnInit {
 
 
 
-
-
-  // File upload task
-  fileUploadTask: AngularFireUploadTask;
-  // Upload progress
-  percentageVal: Observable<any>;
-  // Track file uploading with snapshot
-  trackSnapshot: Observable<any>;
-  // Uploaded File URL
-  UploadedImageURL: Observable<string>;
-  // Uploaded image collection
-  files: Observable<imgFile[]>;
-  // Image specifications
-  imgName: string;
-  imgSize: number;
-  // File uploading status
-  isFileUploading: boolean;
-  isFileUploaded: boolean;
-  private filesCollection: AngularFirestoreCollection<imgFile>;
-  constructor(
-    private afs: AngularFirestore,
-    private afStorage: AngularFireStorage
-  ) {
-    this.isFileUploading = false;
-    this.isFileUploaded = false;
-    // Define uploaded files collection
-    this.filesCollection = afs.collection<imgFile>('imagesCollection');
-    this.files = this.filesCollection.valueChanges();
-  }
-  uploadImage(event: FileList) {
-    const file: any = event.item(0);
-    // Image validation
-    if (file.type.split('/')[0] !== 'image') {
-      console.log('File type is not supported!');
-      return;
-    }
-    this.isFileUploading = true;
-    this.isFileUploaded = false;
-    this.imgName = file.name;
-    // Storage path
-    const fileStoragePath = `filesStorage/${new Date().getTime()}_${file.name}`;
-    // Image reference
-    const imageRef = this.afStorage.ref(fileStoragePath);
-    // File upload task
-    this.fileUploadTask = this.afStorage.upload(fileStoragePath, file);
-    // Show uploading progress
-    this.percentageVal = this.fileUploadTask.percentageChanges();
-    this.trackSnapshot = this.fileUploadTask.snapshotChanges().pipe(
-      finalize(() => {
-        // Retreive uploaded image storage path
-        this.UploadedImageURL = imageRef.getDownloadURL();
-        this.UploadedImageURL.subscribe(
-          (resp) => {
-            this.storeFilesFirebase({
-              name: file.name,
-              filepath: resp,
-              size: this.imgSize,
-            });
-            this.isFileUploading = false;
-            this.isFileUploaded = true;
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }),
-      tap((snap: any) => {
-        this.imgSize = snap.totalBytes;
-      })
-    );
-  }
-  storeFilesFirebase(image: imgFile) {
-    const fileId = this.afs.createId();
-    this.filesCollection
-      .doc(fileId)
-      .set(image)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
 }

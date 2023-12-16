@@ -121,4 +121,5 @@ export class ProfilePage implements OnInit {
     };
     fr.readAsDataURL(pickedFile);
   }
+  
 }

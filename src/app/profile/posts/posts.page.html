@@ -5,14 +5,34 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let post of posts">
+      <ion-thumbnail slot="start">
+        <img [src]="post.gallery[0]" alt="Post Image">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.description }}</p>
+        <p>Price: {{ post.price }}</p>
+        <!-- Add any other details you want to display -->
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="primary" id="open-modal-edit" (click)="loadPostDetails(post.id)">
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deletePost(post.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
  <!--Poupup pour ajouter un nouveau annonce-->
   <ion-fab slot="fixed" id="open-modal" vertical="bottom" horizontal="end" >
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-modal #myModal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ion-modal #myModal trigger="open-modal"  (willDismiss)="onWillDismiss($event)">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -26,28 +46,88 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-item>
-          <ion-input
-            label="Title"
-            labelPlacement="floating"
-            type="text"
-            placeholder="my car"
-            [(ngModel)]="name"
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-textarea label="Description" labelPlacement="floating" placeholder="Enter description"></ion-textarea>
-        </ion-item>
-        <ion-item>
-        <ion-input
-        label="Price"
-        labelPlacement="floating"
-        type="text"
-        placeholder="1500"
-        [(ngModel)]="name"
-      ></ion-input>
-        </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label>Title</ion-label>
+            <ion-input [(ngModel)]="post.title"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Description</ion-label>
+            <ion-textarea [(ngModel)]="post.description"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-select label="Default label" placeholder="Favorite Fruit" [(ngModel)]="post.category">
+              <ion-select-option value="cars">Cars</ion-select-option>
+              <ion-select-option value="moto">Motos</ion-select-option>
+             
+            </ion-select>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label>Price</ion-label>
+            <ion-input [(ngModel)]="post.price" type="number"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Gallery</ion-label>
+            <input type="file" (change)="handleFileInput($event)" multiple>
+          </ion-item>
+        </ion-list>
+      
+      
       </ion-content>
     </ng-template>
   </ion-modal>
+  <ion-modal #edit trigger="open-modal-edit" [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelEdit()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Edit {{postedit.title}}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmEdit()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <ion-item>
+            <ion-label>Title</ion-label>
+            <ion-input [(ngModel)]="postedit.title"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Description</ion-label>
+            <ion-textarea [(ngModel)]="postedit.description"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Description</ion-label>
+            <ion-textarea [(ngModel)]="post.description"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-select label="Category" placeholder="cars or motos" [(ngModel)]="postedit.category">
+              <ion-select-option value="cars">Cars</ion-select-option>
+              <ion-select-option value="moto">Motos</ion-select-option>
+             
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Price</ion-label>
+            <ion-input [(ngModel)]="postedit.price" type="number"></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Gallery</ion-label>
+            <input type="file" (change)="handleFileInput($event)" multiple>
+          </ion-item>
+        </ion-list>
+      
+      
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  
 </ion-content>
