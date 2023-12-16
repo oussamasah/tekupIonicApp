@@ -1,0 +1,31 @@
+<ion-header> </ion-header>
+
+<ion-content >
+
+  <ion-searchbar animated="true" placeholder="Search for car"></ion-searchbar>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" size-sm="6" *ngFor="let item of listProducts">
+        <div
+          class="slide-item-published"
+          [ngStyle]="{'background-image': 'url(assets/imgs/posts/'+item.imgs[0]+' )'}"
+        >
+          <div class="product-desc">
+            <div class="title">{{item.title}}</div>
+           
+          </div>
+          <div class="card-actions">
+            <ion-buttons>
+              <ion-button>
+                <ion-icon name="heart"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <div class="price">{{item.price}}</div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

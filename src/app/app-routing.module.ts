@@ -1,26 +1,62 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { NavigationComponent } from './navigation/navigation.component';
+import { AuthGuard } from './services/guards/auth.guard';
+import { AngularFireAuthGuard, isNotAnonymous ,redirectUnauthorizedTo} from '@angular/fire/compat/auth-guard'
+import { map, pipe } from 'rxjs';
 
-const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'category',
-    loadChildren: () => import('./category/category.module').then( m => m.CategoryPageModule)
-  },
-];
+
+export const redirectAnonymousTo = (redirect: any[]) => 
+  pipe(isNotAnonymous, map(loggedIn => loggedIn || redirect)
+);
+
+const redirectUnauthorizedToLogin = () => redirectAnonymousTo(['login']);
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: NavigationComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'home',
+          },
+          {
+            path: 'home',
+            loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
+          },
+          {
+            path: 'cars',
+            loadChildren: () => import('./cars/cars.module').then( m => m.CarsPageModule)
+          },
+          {
+            path: 'profile',
+            canActivate: [AngularFireAuthGuard],
+            data: { authGuardPipe: redirectUnauthorizedToLogin },
+            loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+          },
+          {
+            path: 'posts',
+            canActivate: [AngularFireAuthGuard],
+            data: { authGuardPipe: redirectUnauthorizedToLogin },
+            loadChildren: () => import('./profile/posts/posts.module').then( m => m.PostsPageModule)
+          },
+          {
+            path: 'signup',
+            loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+          },
+          {
+            path: 'login',
+            loadChildren: () =>  import('./login/login.module').then( m => m.LoginPageModule)
+          }
+        ],
+      },
+
+    ]),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

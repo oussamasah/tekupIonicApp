@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+ <!--Poupup pour ajouter un nouveau annonce-->
+  <ion-fab slot="fixed" id="open-modal" vertical="bottom" horizontal="end" >
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-modal #myModal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Add new post</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Title"
+            labelPlacement="floating"
+            type="text"
+            placeholder="my car"
+            [(ngModel)]="name"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea label="Description" labelPlacement="floating" placeholder="Enter description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+        <ion-input
+        label="Price"
+        labelPlacement="floating"
+        type="text"
+        placeholder="1500"
+        [(ngModel)]="name"
+      ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -6,6 +6,7 @@
     "@angular/common": "^17.0.2",
     "@angular/compiler": "^17.0.2",
     "@angular/core": "^17.0.2",
+    "@angular/fire": "^17.0.0",
     "@angular/forms": "^17.0.2",
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
@@ -71,6 +72,22 @@
         "hash": "91109559695469517"
       },
       {
+        "file": ".nx/cache/file-map.json",
+        "hash": "4753268963779727337"
+      },
+      {
+        "file": ".nx/cache/lockfile.hash",
+        "hash": "13101132446425888590"
+      },
+      {
+        "file": ".nx/cache/parsed-lock-file.json",
+        "hash": "5404818450948141931"
+      },
+      {
+        "file": ".nx/cache/project-graph.json",
+        "hash": "7524547329999292410"
+      },
+      {
         "file": ".vscode/extensions.json",
         "hash": "592272277800690021"
       },
@@ -96,15 +113,15 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "16881833826631779046"
+        "hash": "17072613115694706457"
       },
       {
         "file": "package.json",
-        "hash": "3748802590419282686"
+        "hash": "13572298945002053502"
       },
       {
         "file": "src/app/app-routing.module.ts",
-        "hash": "7092203362848417435"
+        "hash": "5392629870987129746"
       },
       {
         "file": "src/app/app.component.html",
@@ -124,7 +141,31 @@
       },
       {
         "file": "src/app/app.module.ts",
-        "hash": "5073765293049625490"
+        "hash": "6630599047588250372"
+      },
+      {
+        "file": "src/app/cars/cars-routing.module.ts",
+        "hash": "12865221147043808656"
+      },
+      {
+        "file": "src/app/cars/cars.module.ts",
+        "hash": "15649581567772811200"
+      },
+      {
+        "file": "src/app/cars/cars.page.html",
+        "hash": "15167234037118473772"
+      },
+      {
+        "file": "src/app/cars/cars.page.scss",
+        "hash": "11931845919175917707"
+      },
+      {
+        "file": "src/app/cars/cars.page.spec.ts",
+        "hash": "4737743557862686299"
+      },
+      {
+        "file": "src/app/cars/cars.page.ts",
+        "hash": "14459567990952609041"
       },
       {
         "file": "src/app/home/home-routing.module.ts",
@@ -136,11 +177,11 @@
       },
       {
         "file": "src/app/home/home.page.html",
-        "hash": "16919469623841453362"
+        "hash": "1297631942378907834"
       },
       {
         "file": "src/app/home/home.page.scss",
-        "hash": "7197416263316437736"
+        "hash": "13861419184643642902"
       },
       {
         "file": "src/app/home/home.page.spec.ts",
@@ -148,11 +189,123 @@
       },
       {
         "file": "src/app/home/home.page.ts",
-        "hash": "1571215977137710084"
+        "hash": "6612985159142177782"
+      },
+      {
+        "file": "src/app/login/login-routing.module.ts",
+        "hash": "15207053381291759772"
+      },
+      {
+        "file": "src/app/login/login.module.ts",
+        "hash": "17712010613817365668"
+      },
+      {
+        "file": "src/app/login/login.page.html",
+        "hash": "10839592567354691398"
+      },
+      {
+        "file": "src/app/login/login.page.scss",
+        "hash": "7535230463713566673"
+      },
+      {
+        "file": "src/app/login/login.page.spec.ts",
+        "hash": "11622843872418222859"
+      },
+      {
+        "file": "src/app/login/login.page.ts",
+        "hash": "9909381974448388113"
+      },
+      {
+        "file": "src/app/navigation/navigation.component.html",
+        "hash": "16118274439584875479"
+      },
+      {
+        "file": "src/app/navigation/navigation.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/navigation/navigation.component.spec.ts",
+        "hash": "2590014714151681455"
+      },
+      {
+        "file": "src/app/navigation/navigation.component.ts",
+        "hash": "4697811493185143153"
+      },
+      {
+        "file": "src/app/profile/profile-routing.module.ts",
+        "hash": "12227698938751139192"
+      },
+      {
+        "file": "src/app/profile/profile.module.ts",
+        "hash": "17406002826883583243"
+      },
+      {
+        "file": "src/app/profile/profile.page.html",
+        "hash": "15532380731590067690"
+      },
+      {
+        "file": "src/app/profile/profile.page.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/profile/profile.page.spec.ts",
+        "hash": "15405295019962772150"
+      },
+      {
+        "file": "src/app/profile/profile.page.ts",
+        "hash": "3963705677213956605"
+      },
+      {
+        "file": "src/app/services/fireservice.service.spec.ts",
+        "hash": "2538844829933348248"
+      },
+      {
+        "file": "src/app/services/fireservice.service.ts",
+        "hash": "12686200529689433701"
+      },
+      {
+        "file": "src/app/services/guards/auth.guard.spec.ts",
+        "hash": "14265259115332049529"
+      },
+      {
+        "file": "src/app/services/guards/auth.guard.ts",
+        "hash": "17000120921126312845"
+      },
+      {
+        "file": "src/app/signup/signup-routing.module.ts",
+        "hash": "4442325791065758485"
+      },
+      {
+        "file": "src/app/signup/signup.module.ts",
+        "hash": "8669949342057229641"
+      },
+      {
+        "file": "src/app/signup/signup.page.html",
+        "hash": "6797187139085652051"
+      },
+      {
+        "file": "src/app/signup/signup.page.scss",
+        "hash": "7535230463713566673"
+      },
+      {
+        "file": "src/app/signup/signup.page.spec.ts",
+        "hash": "16914769905758231095"
+      },
+      {
+        "file": "src/app/signup/signup.page.ts",
+        "hash": "14686171148796449206"
       },
       {
         "file": "src/assets/icon/favicon.png",
         "hash": "17482944836898362639"
+      },
+      {
+        "file": "src/assets/imgs/posts/post1.jpg",
+        "hash": "934060481672276088"
+      },
+      {
+        "file": "src/assets/imgs/posts/post2.jpg",
+        "hash": "8339199111708197069"
       },
       {
         "file": "src/assets/imgs/slide.jpg",
@@ -176,7 +329,7 @@
       },
       {
         "file": "src/environments/environment.ts",
-        "hash": "17458466784506237106"
+        "hash": "3332478231182812007"
       },
       {
         "file": "src/global.scss",
@@ -212,7 +365,7 @@
       },
       {
         "file": "tsconfig.json",
-        "hash": "9300148005582941852"
+        "hash": "6244770314677204081"
       },
       {
         "file": "tsconfig.spec.json",

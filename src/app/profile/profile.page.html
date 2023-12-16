@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+   
+  <ion-tabs>
+    <ion-tab-bar slot="profile">
+      <ion-tab-button tab="home">
+        <ion-icon name="person"></ion-icon>
+       profile
+      </ion-tab-button>
+      <ion-tab-button tab="posts">
+        <ion-icon name="albums-outline"></ion-icon>
+        Posts
+      </ion-tab-button>
+      <ion-tab-button (click)="logout()">
+        <ion-icon   name="power"></ion-icon>
+        Logout
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- For the Image -->
+<div class="picker">
+  <img
+    class="img"
+    [src]="selectedImage"
+    *ngIf="selectedImage && showPreview"
+  >
+</div>
+<input type="file" accept=".jpg,.png"  #filePicker (change)="onFileChosen($event)"/>
+
+<ion-button class="image-btn" (click)="onPickImage()">
+  <ion-icon name="camera" slot="icon-only"></ion-icon>
+</ion-button>
+
+<!-- Other Textual Information -->
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label position="floating"> Name:</ion-label>
+      <ion-input name="name" required type="text" [(ngModel)]="user.name" #userCtrl="ngModel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input name="email" required type="email" [(ngModel)]="user.email" #studentIds="ngModel"></ion-input>
+    </ion-item>
+
+    <ion-button class="ion-margin" type="submit" expand="block" shape="round" [disabled]="!f.valid">Edit User</ion-button>
+  </ion-list>
+</form>
+
+  <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
