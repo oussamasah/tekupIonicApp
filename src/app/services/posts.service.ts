@@ -14,6 +14,25 @@ export class PostsService {
       map(actions => actions.map(action => this.mapDocumentChange(action)))
     );
   }
+  // Get posts by category
+  getPostsByCategory(category: string): Observable<any[]> {
+    return this.firestore.collection('posts', ref => ref.where('category', '==', category).limit(5)).snapshotChanges().pipe(
+      map(actions => actions.map(action => this.mapDocumentChange(action)))
+    );
+  }
+  // Get posts by category
+  getPostsByUser(id: string): Observable<any[]> {
+    return this.firestore.collection('posts', ref => ref.where('userId', '==', id)).snapshotChanges().pipe(
+      map(actions => actions.map(action => this.mapDocumentChange(action)))
+    );
+  }
+
+  // Get posts by category
+  getPostsAllByCategory(category: string): Observable<any[]> {
+    return this.firestore.collection('posts', ref => ref.where('category', '==', category)).snapshotChanges().pipe(
+      map(actions => actions.map(action => this.mapDocumentChange(action)))
+    );
+  }
 
   private mapDocumentChange(action: DocumentChangeAction<any>): any {
     const data = action.payload.doc.data() as any;

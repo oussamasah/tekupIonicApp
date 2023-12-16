@@ -2,6 +2,7 @@ import { User } from 'firebase/auth';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,19 @@ public auth :AngularFireAuth,
     return this.firestore.collection('users').doc(data.uid).valueChanges()
   }
 
+  getUserProfile(uid: string): Observable<any> {
+    return this.firestore.collection('users').doc(uid).snapshotChanges().pipe(
+      map(action => {
+        const data = action.payload.data() as any;
+        const id = action.payload.id;
+        return { id, ...data };
+      })
+    );
+  }
+
+  updateUserProfile(uid: string, data: any): Promise<void> {
+    return this.firestore.collection('users').doc(uid).update(data);
+  }
   
   getUserById(id:any) {
     return new Promise((resolve, reject) => {

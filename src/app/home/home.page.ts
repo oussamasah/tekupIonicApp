@@ -1,4 +1,7 @@
+import { isNgContainer } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { PostsService } from '../services/posts.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-home',
@@ -6,43 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  lastPublishedCars:any
+  lastPublishedMotors:any
 
-  constructor() {}
-  lastPublished=[
-  {
-    id:"qsd",
+  
+constructor(
+  private afs: AngularFirestore,
+  private postsService: PostsService,
+) {}
 
-    date:"12/12/2023",
-    title:"Peugeot 206",
-    price:"1500 DT",
-    description:"lorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusm",
-    imgs:[
-      "post1.jpg",
-      "post2.jpg",
-    ]
-  },
-  {
-    id:"qsd",
-
-    date:"12/12/2023",
-    title:"Peugeot 206",
-    price:"1500 DT",
-    description:"lorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusm",
-    imgs:[
-      "post1.jpg",
-      "post2.jpg",
-    ]
-  },
-  {
-    id:"qsd",
-    date:"12/12/2023",
-    title:"Peugeot 206",
-    price:"1500 DT",
-    description:"lorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusm",
-    imgs:[
-      "post1.jpg",
-      "post2.jpg",
-    ]
-  },
-]
+ngOnInit() {
+this.load()
+}
+load(){
+  this.postsService.getPostsByCategory('cars').subscribe(posts => {
+    this.lastPublishedCars = posts;
+    console.log('Posts by Category1:', this.lastPublishedCars);
+  });
+  this.postsService.getPostsByCategory('moto').subscribe(posts => {
+    this.lastPublishedMotors = posts;
+    console.log('Posts by Category1:', this.lastPublishedMotors);
+  });
+}
 }

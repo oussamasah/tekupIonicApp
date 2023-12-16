@@ -35,7 +35,7 @@ export class SignupPage implements OnInit {
         let data = {
           email: this.email,
           password: this.password,
-          name: this.name,
+          fullName: this.name,
           uid: res.user.uid
         };
         this.fireService.saveDetails(data).then(res => {

@@ -15,18 +15,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  @Input() showPreview = true;
-  @ViewChild('filePicker') 
-  public user :any={
-    name:"",
-    email:"",
-    photo:"",
-  }
-    //The Selected Image in the File Explorer
-    selectedImage: any;
-
-    //The variable that holds Photo URL
-    uploadedImage: any;
+  user: any;
+  profileData: any = {};
     
   constructor(
     public filePickerRef: ElementRef<HTMLInputElement>,
@@ -43,10 +33,14 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
   
-       const data =  JSON.parse(localStorage.getItem('user')!);
-      this.user = this.fireService.getUserById(data.uid)
-      console.log(this.user)
-
+      
+       this.afAuth.authState.subscribe(user => {
+        if (user) {
+          this.user = JSON.parse(localStorage.getItem('user')!).uid;
+          this.loadUserProfile(JSON.parse(localStorage.getItem('user')!).uid);
+          console.log( this.profileData)
+        }
+      });
    
   }
 
@@ -57,69 +51,21 @@ export class ProfilePage implements OnInit {
       this.router.navigate([''], navigationExtras);
       
     });
+
   }
 
 
-  
-
-  onSubmit(form: NgForm){
-
-    const user = form.value.fname;
-    const studentId = form.value.studentId;
-
-    this.onUpdateUser(user, studentId);
-
-  }//
-
-  async onUpdateUser(name: string, studentNo: string){
-    const loading = await this.loadingCtrl.create({
-      message: 'Updating...',
-      spinner: 'crescent',
-      showBackdrop: true
+  loadUserProfile(uid: string) {
+    this.fireService.getUserProfile(uid).subscribe(profile => {
+      this.profileData = profile;
+      console.log('Received profile:', this.profileData);
     });
-
-    //I call this method to upload the Image
-    this.uploadUserPhoto();
-
-    loading.present();
-
-    this.user.photo = this.uploadedImage;
-    this.user.editedAt = Date.now();
-    this.fireService.saveDetails(this.user)
   }
 
-  //The method for uploading the photo.
-  uploadUserPhoto() {
-    var filePath = `${this.user.uuid}/${this.selectedImage.name}_${new Date().getTime()}`;
-    const fileRef = this.storage.ref(filePath);
-    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-          this.uploadedImage = url;
-        })
-      })
-    ).subscribe();
-  }
-
-  onPickImage() {
-    this.filePickerRef.nativeElement.click();
-  }
-
-  onFileChosen(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const pickedFile = inputElement.files?.[0]; // Use optional chaining
-
-    if (!pickedFile) {
-      return;
-    }
-
-    const fr = new FileReader();
-    fr.onload = () => {
-      const dataUrl = fr.result?.toString();
-      this.selectedImage = dataUrl;
-    
-    };
-    fr.readAsDataURL(pickedFile);
+  updateProfile() {
+    this.fireService.updateUserProfile(JSON.parse(localStorage.getItem('user')!).uid, this.profileData)
+      .then(() => console.log('Profile updated successfully'))
+      .catch(error => console.error('Error updating profile:', error));
   }
   
 }

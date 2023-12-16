@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-cars',
@@ -6,47 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cars.page.scss'],
 })
 export class CarsPage implements OnInit {
-  listProducts:any[]=[]
-  constructor() { }
+  lastPublishedCars:any
 
-  ngOnInit() {
-   this.listProducts=[
-      {
-        id:"qsd",
-    
-        date:"12/12/2023",
-        title:"Peugeot 206",
-        price:"1500 DT",
-        description:"lorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusm",
-        imgs:[
-          "post1.jpg",
-          "post2.jpg",
-        ]
-      },
-      {
-        id:"qsd",
-    
-        date:"12/12/2023",
-        title:"Peugeot 206",
-        price:"1500 DT",
-        description:"lorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusm",
-        imgs:[
-          "post1.jpg",
-          "post2.jpg",
-        ]
-      },
-      {
-        id:"qsd",
-        date:"12/12/2023",
-        title:"Peugeot 206",
-        price:"1500 DT",
-        description:"lorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusmlorem ipusm",
-        imgs:[
-          "post1.jpg",
-          "post2.jpg",
-        ]
-      },
-    ]
-  }
+  
+constructor(
+  private afs: AngularFirestore,
+  private postsService: PostsService,
+) {}
+
+ngOnInit() {
+this.load()
+}
+load(){
+  this.postsService.getPostsAllByCategory('cars').subscribe(posts => {
+    this.lastPublishedCars = posts;
+    console.log('Posts by Category1:', this.lastPublishedCars);
+  });
+ 
+}
 
 }

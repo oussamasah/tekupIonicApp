@@ -20,23 +20,15 @@
 [pagination]="true" [autoplay]="true">
 
 
-  <swiper-slide *ngFor="let item of lastPublished">
-    <ion-card>
+  <swiper-slide *ngFor="let item of lastPublishedCars">
+    
+    <ion-card [routerLink]="['/detail', item.id]">
     <ion-card-header>
     
-      <div class="slide-item-published" [ngStyle]="{'background-image': 'url(assets/imgs/posts/'+item.imgs[0]+' )'}"    >
+      <div class="slide-item-published"  [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}">
 
  
-        <div class="card-actions">
-          <ion-buttons slot="end">
-           <ion-button>
-             <ion-icon name="heart"></ion-icon>
-           </ion-button>
-           <ion-button>
-             <ion-icon name="eye"></ion-icon>
-           </ion-button>
-         </ion-buttons>
-       </div>
+
       </div>
     </ion-card-header>
   
@@ -57,27 +49,19 @@
 
 <ion-label class="grouping">Last published motos</ion-label>
 
-<swiper-container  [loop]="true"
-[pagination]="true" [autoplay]="true">
+<swiper-container  
+[loop]="true"
+[pagination]="true" 
+[autoplay]="true">
 
 
-  <swiper-slide *ngFor="let item of lastPublished">
+  <swiper-slide *ngFor="let item of lastPublishedMotors">
     <ion-card>
     <ion-card-header>
     
-      <div class="slide-item-published" [ngStyle]="{'background-image': 'url(assets/imgs/posts/'+item.imgs[0]+' )'}"    >
+      <div class="slide-item-published" [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}">
 
  
-        <div class="card-actions">
-          <ion-buttons slot="end">
-           <ion-button>
-             <ion-icon name="heart"></ion-icon>
-           </ion-button>
-           <ion-button>
-             <ion-icon name="eye"></ion-icon>
-           </ion-button>
-         </ion-buttons>
-       </div>
       </div>
     </ion-card-header>
   

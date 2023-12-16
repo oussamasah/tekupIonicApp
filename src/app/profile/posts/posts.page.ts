@@ -52,7 +52,7 @@ export class PostsPage implements OnInit {
   };
   post = {
     userId: JSON.parse(localStorage.getItem('user')!).uid,
-    category:"",
+    category:"cars",
     title: '',
     description: '',
     price: '',
@@ -75,7 +75,7 @@ export class PostsPage implements OnInit {
 
   // Chargement des publications
   loadPosts() {
-    this.postService.getPosts().subscribe(posts => {
+    this.postService.getPostsByUser(JSON.parse(localStorage.getItem('user')!).uid).subscribe(posts => {
       this.posts = posts;
     });
   }

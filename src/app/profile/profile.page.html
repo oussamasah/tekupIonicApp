@@ -21,40 +21,26 @@
 </ion-header>
 
 <ion-content>
-<!-- For the Image -->
-<div class="picker">
-  <img
-    class="img"
-    [src]="selectedImage"
-    *ngIf="selectedImage && showPreview"
-  >
-</div>
-<input type="file" accept=".jpg,.png"  #filePicker (change)="onFileChosen($event)"/>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ user.displayName || user.email }}</ion-card-title>
+    </ion-card-header>
 
-<ion-button class="image-btn" (click)="onPickImage()">
-  <ion-icon name="camera" slot="icon-only"></ion-icon>
-</ion-button>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Full Name</ion-label>
+        <ion-input [(ngModel)]="profileData.name" placeholder="Your Full Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Full Name</ion-label>
+        <ion-input [(ngModel)]="profileData.email" placeholder="Your email"></ion-input>
+      </ion-item>
 
-<!-- Other Textual Information -->
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
-  <ion-list lines="full">
-    <ion-item>
-      <ion-label position="floating"> Name:</ion-label>
-      <ion-input name="name" required type="text" [(ngModel)]="user.name" #userCtrl="ngModel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Email:</ion-label>
-      <ion-input name="email" required type="email" [(ngModel)]="user.email" #studentIds="ngModel"></ion-input>
-    </ion-item>
+      <!-- Add more fields as needed -->
 
-    <ion-button class="ion-margin" type="submit" expand="block" shape="round" [disabled]="!f.valid">Edit User</ion-button>
-  </ion-list>
-</form>
+      <ion-button expand="full" (click)="updateProfile()">Update Profile</ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
 </ion-content>

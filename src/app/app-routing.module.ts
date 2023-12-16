@@ -33,6 +33,10 @@ const redirectUnauthorizedToLogin = () => redirectAnonymousTo(['login']);
             loadChildren: () => import('./cars/cars.module').then( m => m.CarsPageModule)
           },
           {
+            path: 'motors',
+            loadChildren: () => import('./motors/motors.module').then( m => m.MotorsPageModule)
+          },
+          {
             path: 'profile',
             canActivate: [AngularFireAuthGuard],
             data: { authGuardPipe: redirectUnauthorizedToLogin },
@@ -51,6 +55,10 @@ const redirectUnauthorizedToLogin = () => redirectAnonymousTo(['login']);
           {
             path: 'login',
             loadChildren: () =>  import('./login/login.module').then( m => m.LoginPageModule)
+          },
+          {
+            path: 'detail/:id',
+            loadChildren: () =>  import('./postdetails/postdetails.module').then( m => m.PostdetailsPageModule)
           }
         ],
       },
