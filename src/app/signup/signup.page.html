@@ -1,36 +1,49 @@
+<!-- En-tête de la page -->
 <ion-header>
   <ion-toolbar>
+    <!-- Titre de la page -->
     <ion-title>signup</ion-title>
+    
+    <!-- Bouton de retour -->
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenu de la page -->
 <ion-content class="ion-pading">
   <div class="form">
+    <!-- Champ de saisie pour le nom -->
     <ion-item>
-      <ion-label position="stacked">Name</ion-label>
+      <ion-label position="stacked">Nom</ion-label>
       <ion-input [(ngModel)]='name'></ion-input>
     </ion-item>
+
+    <!-- Champ de saisie pour l'e-mail -->
     <ion-item>
-      <ion-label position="stacked">Email</ion-label>
+      <ion-label position="stacked">E-mail</ion-label>
       <ion-input [(ngModel)]='email'></ion-input>
     </ion-item>
     <br>
+
+    <!-- Champ de saisie pour le mot de passe -->
     <ion-item>
-      <ion-label position="stacked">Password</ion-label>
+      <ion-label position="stacked">Mot de passe</ion-label>
       <ion-input [(ngModel)]='password'></ion-input>
     </ion-item>
-    <ion-button (click)='signup()' expand='block'>Signup</ion-button>
-  </div>
-  <ion-toast
-  position="top"
-  positionAnchor="header"
-  [isOpen]="isToastOpen"
 
-  message={{message}}
-  [duration]="5000"
-  (didDismiss)="setOpen(false)"
-></ion-toast>
+    <!-- Bouton de signup avec appel à la fonction signup() -->
+    <ion-button (click)='signup()' expand='block'>S'inscrire</ion-button>
+  </div>
+
+  <!-- Composant de toast pour afficher les messages -->
+  <ion-toast
+    position="top"
+    positionAnchor="header"
+    [isOpen]="isToastOpen"
+    message={{message}}
+    [duration]="5000"
+    (didDismiss)="setOpen(false)"
+  ></ion-toast>
 </ion-content>

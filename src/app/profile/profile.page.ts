@@ -9,6 +9,7 @@ import { finalize, first } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from 'firebase/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -20,52 +21,49 @@ export class ProfilePage implements OnInit {
     
   constructor(
     public filePickerRef: ElementRef<HTMLInputElement>,
-    public router :Router,
+    public router: Router,
     private afAuth: AngularFireAuth,
     private loadingCtrl: LoadingController,
     private storage: AngularFireStorage,
     private fireService: FireserviceService,
-    private af : AngularFirestore
-  
-  ) {
- 
-   }
+    private af: AngularFirestore
+  ) {}
 
   ngOnInit() {
-  
-      
-       this.afAuth.authState.subscribe(user => {
-        if (user) {
-          this.user = JSON.parse(localStorage.getItem('user')!).uid;
-          this.loadUserProfile(JSON.parse(localStorage.getItem('user')!).uid);
-          console.log( this.profileData)
-        }
-      });
-   
+    // Abonnement aux changements d'état d'authentification
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        // Récupération de l'ID de l'utilisateur à partir du stockage local
+        this.user = JSON.parse(localStorage.getItem('user')!).uid;
+        // Chargement du profil de l'utilisateur
+        this.loadUserProfile(JSON.parse(localStorage.getItem('user')!).uid);
+        console.log(this.profileData);
+      }
+    });
   }
 
-
-  logout(){
- this.afAuth.signOut().then(() => {
+  // Fonction de déconnexion
+  logout() {
+    this.afAuth.signOut().then(() => {
+      // Redirection vers la page d'accueil après la déconnexion
       const navigationExtras: NavigationExtras = { replaceUrl: true };
       this.router.navigate([''], navigationExtras);
-      
     });
-
   }
 
-
+  // Chargement du profil de l'utilisateur
   loadUserProfile(uid: string) {
     this.fireService.getUserProfile(uid).subscribe(profile => {
       this.profileData = profile;
-      console.log('Received profile:', this.profileData);
+      console.log('Profil reçu :', this.profileData);
     });
   }
 
+  // Mise à jour du profil de l'utilisateur
   updateProfile() {
-    this.fireService.updateUserProfile(JSON.parse(localStorage.getItem('user')!).uid, this.profileData)
-      .then(() => console.log('Profile updated successfully'))
-      .catch(error => console.error('Error updating profile:', error));
+    this.fireService
+      .updateUserProfile(JSON.parse(localStorage.getItem('user')!).uid, this.profileData)
+      .then(() => console.log('Profil mis à jour avec succès'))
+      .catch(error => console.error('Erreur lors de la mise à jour du profil :', error));
   }
-  
 }

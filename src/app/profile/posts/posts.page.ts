@@ -12,7 +12,6 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { imgFile } from 'src/app/interfaces/PostInterface';
 import { PostsService } from 'src/app/services/posts.service';
 
 @Component({

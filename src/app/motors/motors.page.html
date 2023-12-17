@@ -1,26 +1,30 @@
 <ion-header> </ion-header>
 
-<ion-content >
+<ion-content>
 
-  <ion-searchbar animated="true" placeholder="Search for car"></ion-searchbar>
+  <!-- Barre de recherche -->
+  <ion-searchbar animated="true" placeholder="Rechercher une moto"></ion-searchbar>
 
+  <!-- Grille pour afficher les publications -->
   <ion-grid>
     <ion-row>
+      <!-- Utilisation de *ngFor pour itérer sur chaque élément de lastPublishedCars -->
       <ion-col size="6" size-sm="6" *ngFor="let item of lastPublishedCars">
-        <div
-         [routerLink]="['/detail', item.id]"
-          class="slide-item-published"
-          [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}">
+        <!-- Carte représentant une publication avec lien vers les détails -->
+        <div [routerLink]="['/detail', item.id]" class="slide-item-published" [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}">
+          <!-- Description de la publication -->
           <div class="product-desc">
             <div class="title">{{item.title}}</div>
-           
           </div>
+          <!-- Actions sur la carte -->
           <div class="card-actions">
+            <!-- Boutons d'action, par exemple, bouton "J'aime" -->
             <ion-buttons>
               <ion-button>
                 <ion-icon name="heart"></ion-icon>
               </ion-button>
             </ion-buttons>
+            <!-- Prix de la moto -->
             <div class="price">{{item.price}}</div>
           </div>
         </div>

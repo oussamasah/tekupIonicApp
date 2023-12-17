@@ -1,18 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-   
-  <ion-tabs>
-    <ion-tab-bar slot="profile">
+    <!-- Barre d'onglets pour la navigation entre les sections de la page de profil -->
+    <ion-tabs>
+    <ion-tab-bar>
+
+      <!-- Bouton d'onglet pour afficher le profil -->
       <ion-tab-button tab="home">
         <ion-icon name="person"></ion-icon>
-       profile
+        Profile
       </ion-tab-button>
+      <!-- Bouton d'onglet pour afficher les publications (Posts) -->
       <ion-tab-button tab="posts">
         <ion-icon name="albums-outline"></ion-icon>
         Posts
       </ion-tab-button>
+      <!-- Bouton pour se déconnecter -->
       <ion-tab-button (click)="logout()">
-        <ion-icon   name="power"></ion-icon>
+        <ion-icon name="power"></ion-icon>
         Logout
       </ion-tab-button>
     </ion-tab-bar>
@@ -21,26 +25,29 @@
 </ion-header>
 
 <ion-content>
+  <!-- Carte pour afficher les détails du profil -->
   <ion-card>
     <ion-card-header>
+      <!-- Titre de la carte avec le nom ou l'email de l'utilisateur -->
       <ion-card-title>{{ user.displayName || user.email }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
+      <!-- Champ de saisie pour le nom complet -->
       <ion-item>
         <ion-label position="stacked">Full Name</ion-label>
         <ion-input [(ngModel)]="profileData.name" placeholder="Your Full Name"></ion-input>
       </ion-item>
+      <!-- Champ de saisie pour l'email -->
       <ion-item>
-        <ion-label position="stacked">Full Name</ion-label>
+        <ion-label position="stacked">Email</ion-label>
         <ion-input [(ngModel)]="profileData.email" placeholder="Your email"></ion-input>
       </ion-item>
 
-      <!-- Add more fields as needed -->
+    
 
+      <!-- Bouton pour mettre à jour le profil -->
       <ion-button expand="full" (click)="updateProfile()">Update Profile</ion-button>
     </ion-card-content>
   </ion-card>
-
-
 </ion-content>

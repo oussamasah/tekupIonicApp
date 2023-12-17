@@ -1,19 +1,25 @@
+// Importation des modules nécessaires depuis Angular
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AuthGuard } from './services/guards/auth.guard';
-import { AngularFireAuthGuard, isNotAnonymous ,redirectUnauthorizedTo} from '@angular/fire/compat/auth-guard'
+import {
+  AngularFireAuthGuard,
+  isNotAnonymous,
+  redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard';
 import { map, pipe } from 'rxjs';
 
+// Fonction pour rediriger les utilisateurs anonymes vers la page de connexion
+export const redirectAnonymousTo = (redirect: any[]) =>
+  pipe(isNotAnonymous, map(loggedIn => loggedIn || redirect));
 
-export const redirectAnonymousTo = (redirect: any[]) => 
-  pipe(isNotAnonymous, map(loggedIn => loggedIn || redirect)
-);
-
+// Fonction pour rediriger les utilisateurs non autorisés vers la page de connexion
 const redirectUnauthorizedToLogin = () => redirectAnonymousTo(['login']);
 
 @NgModule({
   imports: [
+    // Configuration des routes principales de l'application
     RouterModule.forRoot([
       {
         path: '',
@@ -26,43 +32,50 @@ const redirectUnauthorizedToLogin = () => redirectAnonymousTo(['login']);
           },
           {
             path: 'home',
-            loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
+            loadChildren: () =>
+              import('./home/home.module').then((m) => m.HomePageModule),
           },
           {
             path: 'cars',
-            loadChildren: () => import('./cars/cars.module').then( m => m.CarsPageModule)
+            loadChildren: () =>
+              import('./cars/cars.module').then((m) => m.CarsPageModule),
           },
           {
             path: 'motors',
-            loadChildren: () => import('./motors/motors.module').then( m => m.MotorsPageModule)
+            loadChildren: () =>
+              import('./motors/motors.module').then((m) => m.MotorsPageModule),
           },
           {
             path: 'profile',
             canActivate: [AngularFireAuthGuard],
             data: { authGuardPipe: redirectUnauthorizedToLogin },
-            loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+            loadChildren: () =>
+              import('./profile/profile.module').then((m) => m.ProfilePageModule),
           },
           {
             path: 'posts',
             canActivate: [AngularFireAuthGuard],
             data: { authGuardPipe: redirectUnauthorizedToLogin },
-            loadChildren: () => import('./profile/posts/posts.module').then( m => m.PostsPageModule)
+            loadChildren: () =>
+              import('./profile/posts/posts.module').then((m) => m.PostsPageModule),
           },
           {
             path: 'signup',
-            loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+            loadChildren: () =>
+              import('./signup/signup.module').then((m) => m.SignupPageModule),
           },
           {
             path: 'login',
-            loadChildren: () =>  import('./login/login.module').then( m => m.LoginPageModule)
+            loadChildren: () =>
+              import('./login/login.module').then((m) => m.LoginPageModule),
           },
           {
             path: 'detail/:id',
-            loadChildren: () =>  import('./postdetails/postdetails.module').then( m => m.PostdetailsPageModule)
-          }
+            loadChildren: () =>
+              import('./postdetails/postdetails.module').then((m) => m.PostdetailsPageModule),
+          },
         ],
       },
-
     ]),
   ],
   exports: [RouterModule],

@@ -1,83 +1,56 @@
-<ion-header >
-
+<ion-header>
+  <!-- En-tête de la page -->
 </ion-header>
 
-<ion-content
+<ion-content>
+  <!-- Contenu de la page -->
 
->
-<swiper-container  [loop]="true"
-[pagination]="true" [autoplay]="true">
-  <swiper-slide><div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide.jpg )'}"   alt="slide-1" ></div></swiper-slide>
-  <swiper-slide><div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide2.jpg )'}"   alt="slide-1" ></div></swiper-slide>
-  <swiper-slide><div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide3.jpg )'}"   alt="slide-1" ></div></swiper-slide>
+  <!-- Carrousel principal pour les images statiques -->
+  <swiper-container [loop]="true" [pagination]="true" [autoplay]="true">
+    <swiper-slide>
+      <div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide.jpg )'}" alt="slide-1"></div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide2.jpg )'}" alt="slide-2"></div>
+    </swiper-slide>
+    <swiper-slide>
+      <div class="slide-item" [ngStyle]="{'background-image': 'url( assets/imgs/slide3.jpg )'}" alt="slide-3"></div>
+    </swiper-slide>
+  </swiper-container>
 
-</swiper-container>
+  <!-- Section des dernières voitures publiées -->
+  <ion-label class="grouping">Dernières voitures publiées</ion-label>
+  <swiper-container [loop]="true" [pagination]="true" [autoplay]="true">
+    <swiper-slide *ngFor="let item of lastPublishedCars">
+      <ion-card [routerLink]="['/detail', item.id]">
+        <ion-card-header>
+          <div class="slide-item-published" [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}"></div>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-card-title>{{ item.title }}</ion-card-title>
+          <ion-card-subtitle>{{ item.date }}</ion-card-subtitle>
+          <div class="price">{{ item.price }}</div>
+          <p class="desc">{{ item.description }}</p>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+  </swiper-container>
 
-
-<ion-label class="grouping">Last published cars</ion-label>
-
-<swiper-container  [loop]="true"
-[pagination]="true" [autoplay]="true">
-
-
-  <swiper-slide *ngFor="let item of lastPublishedCars">
-    
-    <ion-card [routerLink]="['/detail', item.id]">
-    <ion-card-header>
-    
-      <div class="slide-item-published"  [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}">
-
- 
-
-      </div>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-card-title>{{item.title}}</ion-card-title>
-      <ion-card-subtitle>{{item.date}}</ion-card-subtitle>
-     <div class="price">{{ item.price}}</div>
-     <p class="desc">{{ item.description}}</p>
-    
-    </ion-card-content>
-
-  </ion-card>
-</swiper-slide>
-</swiper-container>
-
-
-
-
-<ion-label class="grouping">Last published motos</ion-label>
-
-<swiper-container  
-[loop]="true"
-[pagination]="true" 
-[autoplay]="true">
-
-
-  <swiper-slide *ngFor="let item of lastPublishedMotors">
-    <ion-card>
-    <ion-card-header>
-    
-      <div class="slide-item-published" [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}">
-
- 
-      </div>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-card-title>{{item.title}}</ion-card-title>
-      <ion-card-subtitle>{{item.date}}</ion-card-subtitle>
-     <div class="price">{{ item.price}}</div>
-     <p class="desc">{{ item.description}}</p>
-    
-    </ion-card-content>
-
-  </ion-card>
-</swiper-slide>
-</swiper-container>
-
-
+  <!-- Section des dernières motos publiées -->
+  <ion-label class="grouping">Dernières motos publiées</ion-label>
+  <swiper-container [loop]="true" [pagination]="true" [autoplay]="true">
+    <swiper-slide *ngFor="let item of lastPublishedMotors">
+      <ion-card>
+        <ion-card-header>
+          <div class="slide-item-published" [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}"></div>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-card-title>{{ item.title }}</ion-card-title>
+          <ion-card-subtitle>{{ item.date }}</ion-card-subtitle>
+          <div class="price">{{ item.price }}</div>
+          <p class="desc">{{ item.description }}</p>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>
-
-  

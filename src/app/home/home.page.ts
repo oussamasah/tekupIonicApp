@@ -1,4 +1,3 @@
-import { isNgContainer } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -9,26 +8,33 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  lastPublishedCars:any
-  lastPublishedMotors:any
+  // Déclaration des listes de publications
+  lastPublishedCars: any;
+  lastPublishedMotors: any;
 
-  
-constructor(
-  private afs: AngularFirestore,
-  private postsService: PostsService,
-) {}
+  constructor(
+    private afs: AngularFirestore,
+    private postsService: PostsService,
+  ) {}
 
-ngOnInit() {
-this.load()
-}
-load(){
-  this.postsService.getPostsByCategory('cars').subscribe(posts => {
-    this.lastPublishedCars = posts;
-    console.log('Posts by Category1:', this.lastPublishedCars);
-  });
-  this.postsService.getPostsByCategory('moto').subscribe(posts => {
-    this.lastPublishedMotors = posts;
-    console.log('Posts by Category1:', this.lastPublishedMotors);
-  });
-}
+  // Méthode appelée lors de l'initialisation du composant
+  ngOnInit() {
+    // Chargement des publications au démarrage
+    this.load();
+  }
+
+  // Méthode pour charger les publications
+  load() {
+    // Récupération les 5 derniers publications liées à la catégorie 'cars'
+    this.postsService.getPostsByCategory('cars').subscribe(posts => {
+      this.lastPublishedCars = posts;
+      console.log('Publications par catégorie "cars":', this.lastPublishedCars);
+    });
+
+    // Récupération les 5 derniers publications liées à la catégorie 'moto'
+    this.postsService.getPostsByCategory('moto').subscribe(posts => {
+      this.lastPublishedMotors = posts;
+      console.log('Publications par catégorie "moto":', this.lastPublishedMotors);
+    });
+  }
 }
