@@ -73,19 +73,19 @@
       },
       {
         "file": ".nx/cache/file-map.json",
-        "hash": "4753268963779727337"
+        "hash": "9030652881515909397"
       },
       {
         "file": ".nx/cache/lockfile.hash",
-        "hash": "13101132446425888590"
+        "hash": "5447971229847018863"
       },
       {
         "file": ".nx/cache/parsed-lock-file.json",
-        "hash": "5404818450948141931"
+        "hash": "9836324755773616384"
       },
       {
         "file": ".nx/cache/project-graph.json",
-        "hash": "7524547329999292410"
+        "hash": "6426542352351259276"
       },
       {
         "file": ".vscode/extensions.json",
@@ -121,7 +121,7 @@
       },
       {
         "file": "src/app/app-routing.module.ts",
-        "hash": "5392629870987129746"
+        "hash": "5269702070794665928"
       },
       {
         "file": "src/app/app.component.html",
@@ -141,7 +141,7 @@
       },
       {
         "file": "src/app/app.module.ts",
-        "hash": "6630599047588250372"
+        "hash": "4338266888196843132"
       },
       {
         "file": "src/app/cars/cars-routing.module.ts",
@@ -153,7 +153,7 @@
       },
       {
         "file": "src/app/cars/cars.page.html",
-        "hash": "15167234037118473772"
+        "hash": "7711610562134700736"
       },
       {
         "file": "src/app/cars/cars.page.scss",
@@ -165,7 +165,7 @@
       },
       {
         "file": "src/app/cars/cars.page.ts",
-        "hash": "14459567990952609041"
+        "hash": "13854527858842981974"
       },
       {
         "file": "src/app/home/home-routing.module.ts",
@@ -177,7 +177,7 @@
       },
       {
         "file": "src/app/home/home.page.html",
-        "hash": "1297631942378907834"
+        "hash": "14662901330357094259"
       },
       {
         "file": "src/app/home/home.page.scss",
@@ -189,7 +189,7 @@
       },
       {
         "file": "src/app/home/home.page.ts",
-        "hash": "6612985159142177782"
+        "hash": "16814282235209834353"
       },
       {
         "file": "src/app/login/login-routing.module.ts",
@@ -213,11 +213,35 @@
       },
       {
         "file": "src/app/login/login.page.ts",
-        "hash": "9909381974448388113"
+        "hash": "1379691646093157160"
+      },
+      {
+        "file": "src/app/motors/motors-routing.module.ts",
+        "hash": "15021275065573411386"
+      },
+      {
+        "file": "src/app/motors/motors.module.ts",
+        "hash": "12254817253954217064"
+      },
+      {
+        "file": "src/app/motors/motors.page.html",
+        "hash": "8725697440203642021"
+      },
+      {
+        "file": "src/app/motors/motors.page.scss",
+        "hash": "11931845919175917707"
+      },
+      {
+        "file": "src/app/motors/motors.page.spec.ts",
+        "hash": "16936173312840680848"
+      },
+      {
+        "file": "src/app/motors/motors.page.ts",
+        "hash": "11454255642240128334"
       },
       {
         "file": "src/app/navigation/navigation.component.html",
-        "hash": "16118274439584875479"
+        "hash": "4528671539954333780"
       },
       {
         "file": "src/app/navigation/navigation.component.scss",
@@ -232,8 +256,56 @@
         "hash": "4697811493185143153"
       },
       {
+        "file": "src/app/postdetails/postdetails-routing.module.ts",
+        "hash": "16400634376618330066"
+      },
+      {
+        "file": "src/app/postdetails/postdetails.module.ts",
+        "hash": "11419552884776378620"
+      },
+      {
+        "file": "src/app/postdetails/postdetails.page.html",
+        "hash": "1181072924093408137"
+      },
+      {
+        "file": "src/app/postdetails/postdetails.page.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/postdetails/postdetails.page.spec.ts",
+        "hash": "16769149847729393429"
+      },
+      {
+        "file": "src/app/postdetails/postdetails.page.ts",
+        "hash": "389114824029011708"
+      },
+      {
+        "file": "src/app/profile/posts/posts-routing.module.ts",
+        "hash": "6395916555736453063"
+      },
+      {
+        "file": "src/app/profile/posts/posts.module.ts",
+        "hash": "10687082922314520929"
+      },
+      {
+        "file": "src/app/profile/posts/posts.page.html",
+        "hash": "625996882640285363"
+      },
+      {
+        "file": "src/app/profile/posts/posts.page.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/profile/posts/posts.page.spec.ts",
+        "hash": "17672401856451613703"
+      },
+      {
+        "file": "src/app/profile/posts/posts.page.ts",
+        "hash": "6309844506094944218"
+      },
+      {
         "file": "src/app/profile/profile-routing.module.ts",
-        "hash": "12227698938751139192"
+        "hash": "13078011065947167707"
       },
       {
         "file": "src/app/profile/profile.module.ts",
@@ -241,7 +313,7 @@
       },
       {
         "file": "src/app/profile/profile.page.html",
-        "hash": "15532380731590067690"
+        "hash": "6179564399353712392"
       },
       {
         "file": "src/app/profile/profile.page.scss",
@@ -253,7 +325,7 @@
       },
       {
         "file": "src/app/profile/profile.page.ts",
-        "hash": "3963705677213956605"
+        "hash": "746241319964082016"
       },
       {
         "file": "src/app/services/fireservice.service.spec.ts",
@@ -261,7 +333,7 @@
       },
       {
         "file": "src/app/services/fireservice.service.ts",
-        "hash": "12686200529689433701"
+        "hash": "15033497634564334412"
       },
       {
         "file": "src/app/services/guards/auth.guard.spec.ts",
@@ -269,7 +341,15 @@
       },
       {
         "file": "src/app/services/guards/auth.guard.ts",
-        "hash": "17000120921126312845"
+        "hash": "4247388672956830085"
+      },
+      {
+        "file": "src/app/services/posts.service.spec.ts",
+        "hash": "6386177868444191783"
+      },
+      {
+        "file": "src/app/services/posts.service.ts",
+        "hash": "17539412070845318409"
       },
       {
         "file": "src/app/signup/signup-routing.module.ts",
@@ -281,7 +361,7 @@
       },
       {
         "file": "src/app/signup/signup.page.html",
-        "hash": "6797187139085652051"
+        "hash": "3347459739402569622"
       },
       {
         "file": "src/app/signup/signup.page.scss",
@@ -293,7 +373,7 @@
       },
       {
         "file": "src/app/signup/signup.page.ts",
-        "hash": "14686171148796449206"
+        "hash": "10034949751391050092"
       },
       {
         "file": "src/assets/icon/favicon.png",
