@@ -73,7 +73,7 @@
       },
       {
         "file": ".nx/cache/file-map.json",
-        "hash": "9030652881515909397"
+        "hash": "18118154513844268025"
       },
       {
         "file": ".nx/cache/lockfile.hash",
@@ -189,7 +189,7 @@
       },
       {
         "file": "src/app/home/home.page.ts",
-        "hash": "16814282235209834353"
+        "hash": "3955714310861486101"
       },
       {
         "file": "src/app/login/login-routing.module.ts",
