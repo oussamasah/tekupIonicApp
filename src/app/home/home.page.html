@@ -39,7 +39,7 @@
   <!-- Section des dernières motos publiées -->
   <ion-label class="grouping">Dernières motos publiées</ion-label>
   <swiper-container [loop]="true" [pagination]="true" [autoplay]="true">
-    <swiper-slide *ngFor="let item of lastPublishedMotors">
+    <swiper-slide *ngFor="let item of lastPublishedMotors"> 
       <ion-card>
         <ion-card-header>
           <div class="slide-item-published" [ngStyle]="{'background-image': 'url(' + item.gallery[0] + ')'}"></div>
