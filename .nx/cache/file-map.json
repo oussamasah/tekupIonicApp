@@ -11,6 +11,7 @@
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@capacitor/android": "5.5.1",
     "@capacitor/app": "5.0.6",
     "@capacitor/core": "5.5.1",
     "@capacitor/haptics": "5.0.6",
@@ -73,7 +74,7 @@
       },
       {
         "file": ".nx/cache/file-map.json",
-        "hash": "18118154513844268025"
+        "hash": "89752242504265249"
       },
       {
         "file": ".nx/cache/lockfile.hash",
@@ -101,7 +102,7 @@
       },
       {
         "file": "capacitor.config.ts",
-        "hash": "10878807893245233061"
+        "hash": "13437675332947558347"
       },
       {
         "file": "ionic.config.json",
@@ -113,11 +114,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "17072613115694706457"
+        "hash": "6598940500459258556"
       },
       {
         "file": "package.json",
-        "hash": "13572298945002053502"
+        "hash": "15190189822728350185"
       },
       {
         "file": "src/app/app-routing.module.ts",
@@ -189,7 +190,7 @@
       },
       {
         "file": "src/app/home/home.page.ts",
-        "hash": "3955714310861486101"
+        "hash": "475491211102746810"
       },
       {
         "file": "src/app/login/login-routing.module.ts",
@@ -405,7 +406,7 @@
       },
       {
         "file": "src/environments/environment.prod.ts",
-        "hash": "5406836414239361753"
+        "hash": "10594922883157348676"
       },
       {
         "file": "src/environments/environment.ts",
