@@ -7,7 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core"
 
-@NgModule({
+@NgModule({ 
   imports: [
     CommonModule,
     FormsModule,
